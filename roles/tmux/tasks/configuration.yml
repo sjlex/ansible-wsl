@@ -2,11 +2,11 @@
 - name: "Copy tmux config"
   ansible.builtin.copy:
     src: tmux
-    dest: '{{ ansible_env["HOME"] }}/.config/'
+    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/'
     mode: 0644
 
 - name: "Update config"
   ansible.builtin.blockinfile:
-    path: '{{ ansible_env["HOME"] }}/.config/tmux/tmux.conf'
+    path: '{{ ansible_facts["env"]["HOME"] }}/.config/tmux/tmux.conf'
     block: |
       source-file ~/.config/tmux/user_config.conf

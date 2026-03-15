@@ -9,11 +9,13 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
+      - trixie
       - bookworm
-      - bullseye
-      - buster
 
   galaxy_tags:
     - tmux
 
 dependencies: []
+
+collections:
+  - sjlex.collection
