@@ -2,5 +2,5 @@
 - name: "Copy tmuxinator config"
   ansible.builtin.copy:
     src: tmuxinator
-    dest: '{{ ansible_env["HOME"] }}/.config/'
-    mode: 0644
+    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/'
+    mode: "0644"
