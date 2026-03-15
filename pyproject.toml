@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ansible-my-wsl"
 description = "Ansible WSL workstation"
-version = "1.1.0"
+version = "1.7.0"
 license = "MIT"
 
 authors = ["Sergei Aleksandrov <sergei.a.aleks@gmail.com>"]
@@ -22,18 +22,14 @@ repository = "https://github.com/sjlex/ansible-my-wsl"
 documentation = "https://github.com/sjlex/ansible-my-wsl/blob/main/README.md"
 
 [tool.poetry.dependencies]
-python = "3.13.0"
-ansible = "^10.5.0"
+python = "^3.13.12"
+ansible = "==13.4.0"
 
 [tool.poetry.group.dev.dependencies]
-molecule = "^24.9.0"
-molecule-plugins = {extras = ["docker", "vagrant"], version = "^23.5.3"}
-pytest-testinfra = "^10.1.1"
-ansible-lint = { version = "^24.9.2", markers = "platform_system != 'Windows'" }
-yamllint = "^1.35.1"
-ruff = "^0.7.0"
-black = "^24.10.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+molecule = "==25.12.0"
+molecule-plugins = {extras = ["docker", "vagrant"], version = "==25.8.12"}
+pytest-testinfra = "==10.1.1"
+ansible-lint = "==26.3.0"
+yamllint = "==1.38.0"
+ruff = "==0.15.5"
+black = "==26.3.0"

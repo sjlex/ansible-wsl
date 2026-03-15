@@ -5,8 +5,9 @@
 ## Supported Operating Systems
 
 | Platform | Versions                   |
-| -------- | -------------------------- |
-| Debian   | Buster, Bullseye, Bookworm |
+| -------- |----------------------------|
+| Debian   | Bookworm - 12, Trixie - 13 |
+
 
 ## Install WSL-distribution
 
@@ -77,13 +78,13 @@ ANSIBLE_CONFIG=ansible.cfg ./bin/task run:local:wsl1
 passwd <username>
 ```
 
-## Development and testing
+## Development and Testing
 
-### 1. Build a Docker image and run dev-container:
+### 1. Build Docker image and run dev-container:
 
 ```shell
 ./bin/task docker:build
-./bin/task docker:run
+./bin/task docker:dev:run
 ```
 
 ### 2. Install dev dependencies

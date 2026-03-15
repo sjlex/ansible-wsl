@@ -1,8 +1,11 @@
 version: '3'
 
 vars:
-  VERSION: '1.1.0'
+  VERSION: '1.7.0'
   DOCKER_IMAGE: 'ansible-my-wsl:{{.VERSION}}'
+
+  DEV_ANSIBLE_COLLECTION_PATH: '/mnt/ansible-my-collection'
+  DEV_ANSIBLE_COLLECTION_HOST_PATH: '../ansible-my-collection'
 
 env:
   MOLECULE_INSTANCE_ID:
@@ -37,7 +40,7 @@ tasks:
     desc: "Install all dependencies"
     cmds:
       - task: "dependencies:poetry:install"
-      - task: "dependencies:ansible-galaxy:install"
+      - task: "dependencies:dev:ansible-galaxy:install"
 
   "dependencies:poetry:install":
     desc: "Install dependencies (poetry: main + dev)"
@@ -61,6 +64,14 @@ tasks:
       - poetry run
         ansible-galaxy install
           -r requirements.yml
+          {{.CLI_ARGS}}
+
+  "dependencies:dev:ansible-galaxy:install":
+    desc: "Install dependencies (ansible-galaxy)"
+    cmds:
+      - poetry run
+        ansible-galaxy install
+          -r requirements.dev.yml
           {{.CLI_ARGS}}
 
   # ----------------------------------------------------------------------------
@@ -96,6 +107,11 @@ tasks:
     cmds:
       - task: "docker:container:run:shell"
 
+  "docker:dev:run":
+    desc: "Run docker dev container"
+    cmds:
+      - task: "docker:dev:container:run:shell"
+
   "docker:build":
     desc: "Build docker image"
     cmds:
@@ -117,6 +133,19 @@ tasks:
         -v {{.ROOT_DIR}}:/usr/src
         -v /var/run/docker.sock:/var/docker.sock
         -v $HOME/.vagrant.d/boxes:/root/.vagrant.d/boxes
+        -w /usr/src
+        --privileged
+        {{.DOCKER_IMAGE}}
+        {{.CLI_ARGS}} || true
+
+  "docker:dev:container:run:shell":
+    desc: "Run docker container"
+    cmds:
+      - docker run -it --rm
+        -v {{.ROOT_DIR}}:/usr/src
+        -v /var/run/docker.sock:/var/docker.sock
+        -v $HOME/.vagrant.d/boxes:/root/.vagrant.d/boxes
+        -v {{.DEV_ANSIBLE_COLLECTION_HOST_PATH}}:{{.DEV_ANSIBLE_COLLECTION_PATH}}
         -w /usr/src
         --privileged
         {{.DOCKER_IMAGE}}
@@ -227,6 +256,7 @@ tasks:
         ansible-lint
           --config-file .ansible-lint.yml
           --exclude molecule.yml
+          --offline
           -p playbooks/*
           {{.ROOT_DIR}}/*
           {{.CLI_ARGS}}
@@ -243,8 +273,7 @@ tasks:
     desc: "Reformat (ruff)"
     cmds:
       - poetry run
-        ruff
-          --fix
+        ruff check --fix
           {{.ROOT_DIR}}
           {{.CLI_ARGS}}
 

@@ -9,7 +9,7 @@ collections:
   - name: ansible.posix
     version: "==2.1.0"
 
-  - name: sjlex.collection
-    source: https://github.com/sjlex/ansible-my-collection
-    type: git
-    version: "v1.1.0"
+   # Installing collections from a local path
+  - name: "/mnt/ansible-my-collection"
+    type: dir
+    version: "1.7.0"

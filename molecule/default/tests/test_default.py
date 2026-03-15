@@ -14,7 +14,7 @@ def test_user(host, user):
         "broot",
         "btop",
         "docker",
-        "exa",
+        "eza",
         "fish",
         "fzf",
         "git",

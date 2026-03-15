@@ -68,7 +68,7 @@
 
     # Utils
     - role: sjlex.collection.bat
-    - role: sjlex.collection.exa
+    - role: sjlex.collection.eza
     - role: sjlex.collection.fzf
 
     # File managers
