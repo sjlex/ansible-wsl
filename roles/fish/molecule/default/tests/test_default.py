@@ -17,9 +17,8 @@ def test_smoke(host, user):
 @pytest.mark.parametrize(
     "os_name,os_codename,package_name,package_version",
     [
-        ("debian", "buster", "fish", "3.7.1"),
-        ("debian", "bullseye", "fish", "3.7.1"),
-        ("debian", "bookworm", "fish", "3.7.1"),
+        ("debian", "trixie", "fish", "4.5.0"),
+        ("debian", "bookworm", "fish", "4.5.0"),
     ],
 )
 def test_package_is_installed(host, os_name, os_codename, package_name, package_version):
@@ -40,7 +39,7 @@ def test_package_is_installed(host, os_name, os_codename, package_name, package_
         ("ansible", "/home/ansible/.config/fish/env.fish"),
         ("ansible", "/home/ansible/.config/fish/init.fish"),
         ("ansible", "/home/ansible/.config/fish/aliases/user_cd.fish"),
-        ("ansible", "/home/ansible/.config/fish/aliases/user_exa.fish"),
+        ("ansible", "/home/ansible/.config/fish/aliases/user_eza.fish"),
         ("ansible", "/home/ansible/.config/fish/conf.d/user_fzf.fish"),
         ("ansible", "/home/ansible/.config/fish/functions/fish_user_key_bindings.fish"),
         ("ansible", "/home/ansible/.config/fish/functions/user_fzf_select_z.fish"),
