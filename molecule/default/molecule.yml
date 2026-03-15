@@ -1,9 +1,11 @@
 ---
+prerun: false
+
 dependency:
   name: galaxy
   options:
-    role-file: requirements.yml
-    requirements-file: requirements.yml
+    role-file: requirements.dev.yml
+    requirements-file: requirements.dev.yml
 
 driver:
   name: docker

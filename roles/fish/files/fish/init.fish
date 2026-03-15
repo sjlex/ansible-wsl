@@ -1,5 +1,5 @@
 # Load system-wide profile
-for profile in /etc/profile.d/*.sh
+for profile in /etc/profile.d/*.fish
   source $profile
 end
 

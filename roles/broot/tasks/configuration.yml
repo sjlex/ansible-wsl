@@ -1,0 +1,51 @@
+---
+- name: "Ensure broot config directory exists"
+  ansible.builtin.file:
+    path: '{{ ansible_facts["env"]["HOME"] }}/.config/broot'
+    state: directory
+    mode: "0755"
+
+- name: "Copy conf.hjson"
+  ansible.builtin.copy:
+    src: conf.hjson
+    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/broot/conf.hjson'
+    mode: '0644'
+
+- name: "Copy verbs.hjson"
+  ansible.builtin.copy:
+    src: verbs.hjson
+    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/broot/verbs.hjson'
+    mode: '0644'
+
+- name: "Copy skins"
+  ansible.builtin.copy:
+    src: skins
+    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/broot'
+    mode: '0644'
+
+- name: "Check if bash exists"
+  ansible.builtin.stat:
+    path: /bin/bash
+  register: __bash_bin
+
+- name: "Automatic shell function installation (bash)"
+  ansible.builtin.shell: |
+    set -o pipefail &&
+    broot --install
+  args:
+    executable: /bin/bash
+  when: __bash_bin.stat.exists
+  changed_when: false
+
+- name: "Check if fish exists"
+  ansible.builtin.stat:
+    path: /usr/bin/fish
+  register: __fish_bin
+
+- name: "Automatic shell function installation (fish)"
+  ansible.builtin.shell: |
+    broot --install
+  args:
+    executable: /usr/bin/fish
+  when: __fish_bin.stat.exists
+  changed_when: false

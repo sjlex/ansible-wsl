@@ -117,6 +117,13 @@ molecule verify &&
 molecule destroy
 ```
 
+#### 3.1.1 Login:
+
+```shell
+molecule login --host wsl_role-[name]_debian13_
+molecule login --host wsl_role-fish_debian12_
+```
+
 #### 3.2 Playbooks
 
 - Molecule default scenario (docker):
@@ -128,6 +135,15 @@ molecule destroy
   molecule destroy -s default
   ```
 
+  ```shell
+  molecule login -s default --host playbook-main-debian13-
+  molecule login -s default --host playbook-main-debian12-
+  ```
+
+  ```shell
+  sudo su - <user>
+  ```
+
 - Molecule VM scenario (vagrant + libvirt + qemu):
 
   ```shell
@@ -135,6 +151,15 @@ molecule destroy
   molecule converge -s main-vm &&
   molecule verify -s main-vm &&
   molecule destroy -s main-vm
+  ```
+
+  ```shell
+  molecule login -s main-vm --host playbook-main-debian13-
+  molecule login -s main-vm --host playbook-main-debian12-
+  ```
+
+  ```shell
+  sudo su - <user>
   ```
 
 ### 4. Testing

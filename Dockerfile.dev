@@ -3,6 +3,8 @@ ARG OS_VERSION_CODENAME=trixie
 ARG POETRY_VERSION=2.3.2
 ARG TASKFILE_VERSION=3.49.1
 
+ARG DEV_ANSIBLE_COLLECTION_PATH="/mnt/ansible-my-collection"
+
 # -----------------------------------------------------------------------------
 # BASE
 # ------------------------------------------------------------------------------
@@ -111,6 +113,9 @@ RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- \
 # ------------------------------------------------------------------------------
 FROM runtime-env AS project-env
 
+ARG DEV_ANSIBLE_COLLECTION_PATH
+ARG DEV_ANSIBLE_COLLECTION_HOST_PATH
+
 WORKDIR /usr/src
 
 # Install dependencies
@@ -122,11 +127,12 @@ RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
         --no-directory
 
 # Install ansible-galaxy collections
-RUN --mount=type=bind,source=requirements.yml,target=requirements.yml \
+RUN --mount=type=bind,source=requirements.dev.yml,target=requirements.dev.yml \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     --mount=type=bind,source=poetry.lock,target=poetry.lock \
+    --mount=type=bind,from=ansible-my-collection,target=$DEV_ANSIBLE_COLLECTION_PATH \
     poetry run \
-    ansible-galaxy collection install -r requirements.yml
+    ansible-galaxy collection install -r requirements.dev.yml
 
 # ------------------------------------------------------------------------------
 # RUNTIME

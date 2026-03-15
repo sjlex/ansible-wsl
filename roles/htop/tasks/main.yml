@@ -1,0 +1,16 @@
+---
+- name: "Role: htop"
+  tags:
+    - htop
+  when:
+    - ansible_facts['distribution'] == 'Debian'
+    - ansible_facts['distribution_major_version'] | int >= 12
+  block:
+    - name: "Install packages"
+      ansible.builtin.include_role:
+        name: "sjlex.collection.htop"
+        public: true
+
+    - name: "Configuration"
+      ansible.builtin.include_tasks:
+        file: configuration.yml

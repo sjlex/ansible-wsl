@@ -4,3 +4,5 @@
   become_user: root
   ansible.builtin.apt:
     upgrade: dist
+  environment:
+    DEBIAN_FRONTEND: noninteractive

@@ -1,4 +1,6 @@
 ---
+ansible_python_interpreter: "/usr/bin/python3"
+
 user_name: "serjleks"
 user_shell: "/usr/bin/fish"
 user_uid: 1000

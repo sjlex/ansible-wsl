@@ -1,0 +1,15 @@
+---
+- name: "Role: git"
+  tags:
+    - git
+  when:
+    - ansible_facts['distribution'] == 'Debian'
+    - ansible_facts['distribution_major_version'] | int >= 12
+  block:
+    - name: "Install packages"
+      ansible.builtin.include_role:
+        name: "sjlex.collection.git"
+
+    - name: "Configuration"
+      ansible.builtin.include_tasks:
+        file: configuration.yml

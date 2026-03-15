@@ -121,6 +121,7 @@ tasks:
     desc: "Build docker image"
     cmds:
       - docker buildx build
+        --build-context ansible-my-collection={{.DEV_ANSIBLE_COLLECTION_HOST_PATH}}
         -t {{.DOCKER_IMAGE}}
         -f Dockerfile.dev
         {{.ROOT_DIR}}
@@ -257,7 +258,8 @@ tasks:
           --config-file .ansible-lint.yml
           --exclude molecule.yml
           --offline
-          -p playbooks/*
+          --format=pep8
+          playbooks/*
           {{.ROOT_DIR}}/*
           {{.CLI_ARGS}}
 

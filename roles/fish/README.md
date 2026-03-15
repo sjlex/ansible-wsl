@@ -16,7 +16,7 @@ None
 Dependencies
 ------------
 
-None
+    - sjlex.collection.fish
 
 Example Playbook
 ----------------

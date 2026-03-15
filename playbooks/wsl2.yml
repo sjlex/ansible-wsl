@@ -56,7 +56,7 @@
     # --------------------------------------------------------------------------
 
     # Git
-    - role: sjlex.collection.git
+    - role: git
 
     # Docker
     - role: sjlex.collection.docker
@@ -73,9 +73,9 @@
 
     # File managers
     - role: sjlex.collection.mc
-    - role: sjlex.collection.broot
+    - role: broot
 
     # Monitoring
     - role: sjlex.collection.btop
-    - role: sjlex.collection.htop
+    - role: htop
     - role: sjlex.collection.ncdu

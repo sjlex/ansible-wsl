@@ -22,11 +22,11 @@ repository = "https://github.com/sjlex/ansible-my-wsl"
 documentation = "https://github.com/sjlex/ansible-my-wsl/blob/main/README.md"
 
 [tool.poetry.dependencies]
-python = "^3.13.12"
+python = "^3.13"
 ansible = "==13.4.0"
 
 [tool.poetry.group.dev.dependencies]
-molecule = "==25.12.0"
+molecule = "==25.1.0"
 molecule-plugins = {extras = ["docker", "vagrant"], version = "==25.8.12"}
 pytest-testinfra = "==10.1.1"
 ansible-lint = "==26.3.0"
