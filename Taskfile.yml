@@ -74,12 +74,21 @@ tasks:
           -r requirements.dev.yml
           {{.CLI_ARGS}}
 
+  "dependencies:clear":
+    desc: "Clear all dependencies"
+    cmds:
+      - poetry env remove --all
+      - poetry cache clear --no-interaction --all .
+      - pyenv version | awk '{print $1}' | xargs pyenv uninstall -f
+
   # ----------------------------------------------------------------------------
   # Ansible
   # ----------------------------------------------------------------------------
 
   "run:local:wsl1":
     desc: "Run an Ansible playbook locally (wsl-1)"
+    env:
+      ANSIBLE_CONFIG: ansible.cfg
     cmds:
       - poetry run
         ansible-playbook
@@ -90,6 +99,8 @@ tasks:
 
   "run:local:wsl2":
     desc: "Run an Ansible playbook locally (wsl-2)"
+    env:
+      ANSIBLE_CONFIG: ansible.cfg
     cmds:
       - poetry run
         ansible-playbook
@@ -263,6 +274,12 @@ tasks:
           {{.ROOT_DIR}}/*
           {{.CLI_ARGS}}
 
+  "lint:ansible-lint:clear":
+    desc: "Clear ansible-lint cache"
+    cmds:
+      - rm -rf .cache/ansible-lint
+      - rm -rf .ansible
+
   "lint:ruff":
     desc: "Linting (ruff)"
     cmds:
@@ -278,6 +295,11 @@ tasks:
         ruff check --fix
           {{.ROOT_DIR}}
           {{.CLI_ARGS}}
+
+  "lint:ruff:clear":
+    desc: "Clear ruff cache"
+    cmds:
+      - rm -rf .ruff_cache
 
   "lint:black":
     desc: "Linting (black)"
@@ -298,3 +320,19 @@ tasks:
           --line-length=120
           {{.ROOT_DIR}}
           {{.CLI_ARGS}}
+
+  # ----------------------------------------------------------------------------
+  # Clear
+  # ----------------------------------------------------------------------------
+
+  "clear":
+    desc: "Clear"
+    deps:
+      - task: "clear:all"
+
+  "clear:all":
+    desc: "Clear all"
+    cmds:
+      - task: "lint:ansible-lint:clear"
+      - task: "lint:ruff:clear"
+      - task: "dependencies:clear"

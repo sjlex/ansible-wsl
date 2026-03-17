@@ -25,7 +25,7 @@ wsl --set-default-version 2
 wsl --import debian-wsl2 C:\wsl\debian-wsl2 install.tar.gz
 ```
 
-### Post-install:
+### Post-Install:
 
 ```shell
 wsl --set-default-version 2
@@ -45,10 +45,16 @@ wsl -d debian-wsl2 -u root
 
 ### 3. Install the required dependencies:
 
-- Install python and poetry:
+- Install python, pyenv and poetry:
 
 ```shell
-apt install -y python3 python3-poetry
+apt install -y python3 python3-poetry pyenv
+```
+
+- Use a specific Python version for this project:
+
+```shell
+pyenv install
 ```
 
 - Install dependencies:
@@ -66,16 +72,16 @@ apt install -y python3 python3-poetry
 ./bin/task run:local:wsl2
 ```
 
-or
-
-```shell
-ANSIBLE_CONFIG=ansible.cfg ./bin/task run:local:wsl1
-```
-
 ### 2. Change user password:
 
 ```shell
 passwd <username>
+```
+
+### 3. Clear cache and python env
+
+```shell
+./bin/task dependencies:clear
 ```
 
 ## Development and Testing
