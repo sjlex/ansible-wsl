@@ -80,6 +80,7 @@ RUN apt-get update -qq \
         nfs-common \
         nfs-kernel-server \
         pipx \
+        pyenv \
         python3-apt \
         qemu-kvm \
         qemu-system \
