@@ -44,7 +44,7 @@ def test_config(host, user, config_path):
     assert config.is_file
     assert config.size > 0
     assert config.user == user
-    assert config.contains('default_flags: "-hipg"')
+    assert config.contains('default_flags: "-hip -G --sort-by-type-dirs-first"')
     assert config.contains("file: skins/dark-void.hjson")
 
 
@@ -52,6 +52,7 @@ def test_config(host, user, config_path):
     "user,config_path",
     [
         ("ansible", "/home/ansible/.config/broot/verbs.hjson"),
+        ("ansible", "/home/ansible/.config/broot/verbs_utils.hjson"),
         ("ansible", "/home/ansible/.config/broot/skins/dark-void.hjson"),
     ],
 )

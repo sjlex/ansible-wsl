@@ -1,27 +1,9 @@
 ---
-- name: "Ensure broot config directory exists"
-  ansible.builtin.file:
-    path: '{{ ansible_facts["env"]["HOME"] }}/.config/broot'
-    state: directory
-    mode: "0755"
-
-- name: "Copy conf.hjson"
+- name: "Copy broot config"
   ansible.builtin.copy:
-    src: conf.hjson
-    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/broot/conf.hjson'
-    mode: '0644'
-
-- name: "Copy verbs.hjson"
-  ansible.builtin.copy:
-    src: verbs.hjson
-    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/broot/verbs.hjson'
-    mode: '0644'
-
-- name: "Copy skins"
-  ansible.builtin.copy:
-    src: skins
-    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/broot'
-    mode: '0644'
+    src: broot
+    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/'
+    mode: "0644"
 
 - name: "Check if bash exists"
   ansible.builtin.stat:

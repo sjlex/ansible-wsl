@@ -1,0 +1,150 @@
+###############################################################
+# This file contains the verb definitions for broot
+#
+# Some verbs here are examples and not enabled by default: you
+#  need to uncomment them if you want to use them.
+#
+# Documentation at https://dystroy.org/broot/verbs/
+###############################################################
+
+verbs: [
+    # --- File ---
+    {
+        name: open
+        shortcut: o
+        key: ctrl-enter
+        internal: ":open_leave"
+        apply_to: directory
+    }
+
+    {
+        name: open
+        shortcut: o
+        key: ctrl-o
+        internal: ":open_leave"
+        apply_to: directory
+    }
+
+    {
+        name: edit
+        shortcut: e
+        key: ctrl-e
+        apply_to: text_file
+        execution: "$EDITOR +{line} {file}"
+        leave_broot: false
+    }
+
+    {
+        name: edit
+        shortcut: o
+        key: ctrl-o
+        apply_to: text_file
+        execution: "$EDITOR +{line} {file}"
+        leave_broot: false
+    }
+
+    {
+        name: edit
+        shortcut: e
+        key: ctrl-enter
+        apply_to: text_file
+        execution: "$EDITOR +{line} {file}"
+        leave_broot: false
+    }
+
+    # --- Text ---
+    {
+        key: ctrl-left
+        internal: ":input_go_word_left"
+    }
+    {
+        key: ctrl-right
+        internal: ":input_go_word_right"
+    }
+    {
+        key: "ctrl-w" # ctrl-backspace
+        internal: ":input_del_word_left"
+    }
+    {
+        key: ctrl-delete
+        internal: ":input_del_word_right"
+    }
+
+    {
+        name: refresh
+        key: ctrl-r
+        internal: ":refresh"
+    }
+
+    # --- Navigations ---
+    {
+        name: home
+        key: ctrl-h
+        execution: ":focus ~"
+    }
+
+    {
+        key: ctrl-up
+        internal: ":previous_same_depth"
+    }
+    {
+        key: ctrl-down
+        internal: ":next_same_depth"
+    }
+
+    {
+        key: ctrl-shift-pageup
+        internal: ":root_up"
+    }
+    {
+        key: ctrl-shift-pagedown
+        internal: ":back"
+    }
+
+    # --- Panels ---
+    {
+        key: shift-left
+        internal: ":panel_left_no_open"
+    }
+    {
+        key: shift-right
+        internal: ":panel_right"
+    }
+
+    # --- Search ---
+    {
+        name: search_again
+        key: alt-f
+        internal: ":search_again"
+    }
+
+    {
+        key: alt-z
+        internal: ":previous_match"
+    }
+    {
+        key: alt-m
+        internal: ":next_match"
+    }
+
+    # --- Stage ---
+    {
+        name: stage
+        key: alt-shift-s
+        internal: ":stage"
+    }
+    {
+        name: unstage
+        key: alt-shift-r
+        internal: ":unstage"
+    }
+
+    # --- Terminal ---
+    {
+        name: terminal
+        key: alt-shift-t
+        execution: "$SHELL"
+        set_working_dir: true
+        leave_broot: false
+    }
+]

@@ -24,7 +24,7 @@
 # you can launch broot with `br -H`).
 # A popular flag is the `g` one which displays git related info.
 
-default_flags: "-hipg"
+default_flags: "-hip -G --sort-by-type-dirs-first"
 
 ###############################################################
 # Terminal's title
@@ -110,7 +110,19 @@ show_selection_mark: true
 #  (they're otherwise not entered by broot unless selected)
 #
 special_paths: {
+    "/mnt" : {
+        list: "never"
+        sum: "never"
+    }
     "/media" : {
+        list: "never"
+        sum: "never"
+    }
+    "~/.cache" : {
+        list: "never"
+        sum: "never"
+    }
+    "/var/cache" : {
         list: "never"
         sum: "never"
     }
@@ -281,6 +293,7 @@ imports: [
     # Verbs are better configured in verbs.hjson. But you
     # can also add another files for your personal verbs
     verbs.hjson
+    verbs_utils.hjson
 
     # This file contains the skin to use when the terminal
     # is dark (or when this couldn't be determined)

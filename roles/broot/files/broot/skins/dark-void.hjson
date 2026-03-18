@@ -37,8 +37,8 @@ skin: {
     count: ansi(138) gray(4)
     dates: ansi(66) None
     sparse: ansi(214) None
-    content_extract: ansi(29) None
-    content_match: ansi(34) None
+    content_extract: gray(14) None
+    content_match: ansi(11) None
     device_id_major: ansi(138) None
     device_id_sep: ansi(102) None
     device_id_minor: ansi(138) None
@@ -80,7 +80,7 @@ skin: {
     preview_title: gray(23) None  / gray(21) None
     preview_line_number: gray(12) None
     preview_separator: gray(5) None
-    preview_match: None ansi(29)
+    preview_match: None ansi(22)
     hex_null: gray(8) None
     hex_ascii_graphic: gray(18) None
     hex_ascii_whitespace: ansi(143) None
