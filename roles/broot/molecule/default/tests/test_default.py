@@ -35,6 +35,7 @@ def test_package_is_installed(host, os_name, os_codename, package_name, package_
     "user,config_path",
     [
         ("ansible", "/home/ansible/.config/broot/conf.hjson"),
+        ("root", "/root/.config/broot/conf.hjson"),
     ],
 )
 def test_config(host, user, config_path):
@@ -54,6 +55,9 @@ def test_config(host, user, config_path):
         ("ansible", "/home/ansible/.config/broot/verbs.hjson"),
         ("ansible", "/home/ansible/.config/broot/verbs_utils.hjson"),
         ("ansible", "/home/ansible/.config/broot/skins/dark-void.hjson"),
+        ("root", "/root/.config/broot/verbs.hjson"),
+        ("root", "/root/.config/broot/verbs_utils.hjson"),
+        ("root", "/root/.config/broot/skins/dark-void.hjson"),
     ],
 )
 def test_configs(host, user, config_path):

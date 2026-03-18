@@ -5,6 +5,13 @@
     dest: '{{ ansible_facts["env"]["HOME"] }}/.config/'
     mode: "0644"
 
+- name: "Copy broot config to root dir"
+  ansible.builtin.copy:
+    src: broot
+    dest: "/root/.config/"
+    mode: "0644"
+  become: true
+
 - name: "Check if bash exists"
   ansible.builtin.stat:
     path: /bin/bash
