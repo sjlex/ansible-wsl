@@ -8,7 +8,6 @@ user_groups:
   - sudo
 
 wsl_user_name: "serjleks"
-wsl_memory: "8GB"
 
 git_user_name: "Sergei Aleksandrov"
 git_user_email: "sergei.a.aleks@gmail.com"
