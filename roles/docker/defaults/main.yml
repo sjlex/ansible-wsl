@@ -1,7 +1,5 @@
 ---
 # defaults file for docker
 
-docker_context_default: "remote"
-docker_context:
-  - name: "remote"
-    endpoint: "tcp://localhost:2375"
+docker_context_default: ""
+docker_context: []
