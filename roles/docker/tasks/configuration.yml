@@ -1,0 +1,58 @@
+---
+- name: "Check if docker context exists for current user"
+  ansible.builtin.command: docker context inspect "{{ item.name }}"
+  loop: "{{ docker_context | default([]) }}"
+  register: _docker_context_check_user
+  changed_when: false
+  failed_when: false
+
+- name: "Create docker context for current user"
+  ansible.builtin.command: docker context create --docker "host={{ item.item.endpoint }}" "{{ item.item.name }}"
+  loop: "{{ _docker_context_check_user.results }}"
+  when: item.rc != 0
+
+- name: "Check if docker context exists for root"
+  ansible.builtin.command: docker context inspect "{{ item.name }}"
+  loop: "{{ docker_context | default([]) }}"
+  become: true
+  become_user: root
+  register: docker_context_check_root
+  changed_when: false
+  failed_when: false
+
+- name: "Create docker context for root"
+  ansible.builtin.command: docker context create --docker "host={{ item.item.endpoint }}" "{{ item.item.name }}"
+  loop: "{{ docker_context_check_root.results }}"
+  become: true
+  become_user: root
+  when: item.rc != 0
+
+- name: "Get current docker context for current user"
+  ansible.builtin.command: docker context show
+  register: _docker_context_current_user
+  changed_when: false
+  failed_when: false
+  when: docker_context_default is defined
+
+- name: "Set default docker context for current user"
+  ansible.builtin.command: docker context use "{{ docker_context_default }}"
+  when:
+    - docker_context_default is defined
+    - _docker_context_current_user.stdout | default('') != docker_context_default
+
+- name: "Get current docker context for root"
+  ansible.builtin.command: docker context show
+  become: true
+  become_user: root
+  register: _docker_context_current_root
+  changed_when: false
+  failed_when: false
+  when: docker_context_default is defined
+
+- name: "Set default docker context for root"
+  ansible.builtin.command: docker context use "{{ docker_context_default }}"
+  become: true
+  become_user: root
+  when:
+    - docker_context_default is defined
+    - _docker_context_current_root.stdout | default('') != docker_context_default

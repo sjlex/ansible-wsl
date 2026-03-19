@@ -1,3 +1,5 @@
 ---
-docker_host_tcp: true
-docker_host_url: "tcp://localhost:2375"
+docker_context_default: "main-win11"
+docker_context:
+  - name: "main-win11"
+    endpoint: "tcp://localhost:2375"

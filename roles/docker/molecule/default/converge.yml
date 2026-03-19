@@ -1,0 +1,33 @@
+---
+- name: "Converge"
+  hosts: all
+  remote_user: "ansible"
+
+  tasks:
+    - name: "Include docker"
+      ansible.builtin.include_role:
+        name: "docker"
+      vars:
+        docker_context_default: "remote"
+        docker_context:
+          - name: remote
+            endpoint: "tcp://localhost:2375"
+          - name: remote-foo
+            endpoint: "tcp://foo:1234"
+
+    - name: "Ensure docker socket is accessible in tests"
+      become: true
+      become_user: root
+      ansible.builtin.file:
+        path: /var/run/docker.sock
+        group: docker
+        mode: '0666'
+      changed_when: false
+
+    - name: "Add User to group"
+      become: true
+      become_user: root
+      ansible.builtin.user:
+        name: "ansible"
+        groups: "docker"
+        append: true
