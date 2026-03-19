@@ -126,6 +126,36 @@ special_paths: {
         list: "never"
         sum: "never"
     }
+
+    "/c" : {
+        list: "never"
+        sum: "never"
+    }
+    "/d" : {
+        list: "never"
+        sum: "never"
+    }
+    "/e" : {
+        list: "never"
+        sum: "never"
+    }
+    "/f" : {
+        list: "never"
+        sum: "never"
+    }
+    "/g" : {
+        list: "never"
+        sum: "never"
+    }
+    "/r" : {
+        list: "never"
+        sum: "never"
+    }
+    "/s" : {
+        list: "never"
+        sum: "never"
+    }
+
     "~/.config": { "show": "always" }
     "trav": {
         show: always
