@@ -3,7 +3,7 @@ function fish_user_key_bindings
   bind \el 'user_list_current_token'
 
   # ctrl+shift+f
-  bind \e\[70\;6u 'br --cmd "//&cr//i"'
+  bind \e\[70\;6u 'br --cmd "//&cr//i"; commandline -f repaint'
 
   # ctrl+g
   bind \cg '__fzf_find_file'
@@ -23,9 +23,15 @@ function fish_user_key_bindings
   bind \b backward-kill-word
 
   # ctrl+e
-  bind \ce 'br .'
+  bind \ce 'br .; commandline -f repaint'
 
   # ctrl+h
   bind \ch 'cd ~; commandline -f repaint'
+
+  # ctrl+shift+pageup
+  bind \e\[5\;6~ 'cd ..; commandline -f repaint'
+
+  # ctrl+shift+pagedown
+  bind \e\[6\;6~ 'prevd; commandline -f repaint'
 
 end
