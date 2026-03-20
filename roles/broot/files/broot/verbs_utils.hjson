@@ -24,7 +24,8 @@ verbs: [
     {
         name: print_path
         key: ctrl-l
-        internal: ":print_path"
+        execution: "commandline -i '{file}'"
+        from_shell: true
     }
 
     {
