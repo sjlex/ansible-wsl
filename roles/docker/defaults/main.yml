@@ -1,5 +1,0 @@
----
-# defaults file for docker
-
-docker_context_default: ""
-docker_context: []

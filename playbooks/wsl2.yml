@@ -59,7 +59,7 @@
     - role: git
 
     # Docker
-    - role: docker
+    - role: sjlex.collection.docker
     - role: sjlex.collection.lazydocker
 
     # Text editors
