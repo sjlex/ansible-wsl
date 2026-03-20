@@ -10,6 +10,15 @@
 verbs: [
     # --- File ---
     {
+        name:  create
+        key: ctrl-n
+        invocation: "create -p {new_file}"
+        execution: '/bin/sh -c \"mkdir -p {directory}/$(dirname {new_file}) && touch {directory}/{new_file}\"'
+        leave_broot: false
+        auto_exec: false
+    }
+
+    {
         name: open
         shortcut: o
         key: ctrl-enter
@@ -116,6 +125,14 @@ verbs: [
         name: search_again
         key: alt-f
         internal: ":search_again"
+    }
+
+    {
+        name: find_in_files
+        key: ctrl-shift-f
+        external: 'broot --cmd "//&cr//i" {directory}'
+        leave_broot: true
+        auto_exec: true
     }
 
     {
