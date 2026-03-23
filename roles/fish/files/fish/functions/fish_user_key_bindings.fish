@@ -1,5 +1,9 @@
 function fish_user_key_bindings
 
+  # alt+s: sudo
+  # alt+o: preview
+  # f1: help
+
   bind \ci complete
 
   # ls
