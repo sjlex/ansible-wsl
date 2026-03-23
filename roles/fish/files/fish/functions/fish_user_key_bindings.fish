@@ -1,21 +1,24 @@
 function fish_user_key_bindings
+
+  bind \ci complete
+
   # ls
   bind \el 'user_list_current_token'
 
   # ctrl+shift+f
-  bind \e\[70\;6u 'br --cmd "//&cr//i"; commandline -f repaint'
+  bind \e\[70\;5u 'br --cmd "//&cr//i"; commandline -f repaint'
 
   # ctrl+g
   bind \cg '__fzf_find_file'
 
   # ctrl+shift+g
-  bind \e\[71\;6u '__fzf_cd --hidden'
+  bind \e\[71\;5u '__fzf_cd --hidden'
 
   # ctrl+r
   bind \cr '__fzf_reverse_isearch'
 
   # ctrl+shift+r
-  bind \e\[82\;6u 'user_fzf_select_z'
+  bind \e\[82\;5u 'user_fzf_select_z'
 
   # ctrl+delete
   bind \e\[3\;5~ kill-word

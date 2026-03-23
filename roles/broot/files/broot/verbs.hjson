@@ -130,8 +130,8 @@ verbs: [
     {
         name: find_in_files
         key: ctrl-shift-f
-        external: 'broot --cmd "//&cr//i" {directory}'
-        leave_broot: true
+        execution: "br --cmd '//&cr//i' {directory}"
+        from_shell: true
         auto_exec: true
     }
 
