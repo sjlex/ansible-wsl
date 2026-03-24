@@ -48,7 +48,7 @@ wsl -d debian-wsl2 -u root
 - Install python, pyenv and poetry:
 
 ```shell
-apt install -y python3 python3-poetry pyenv
+apt install -y python3 python3-poetry python-is-python3 pyenv
 ```
 
 - Use a specific Python version for this project:

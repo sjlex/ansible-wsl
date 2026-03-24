@@ -1,13 +1,15 @@
 ---
 - name: "Get __htop_installed_version"
   block:
-    - name: "Gather the package facts"
-      ansible.builtin.package_facts:
-        manager: auto
+    - name: "Check if htop is installed"
+      ansible.builtin.command: "dpkg-query -W -f='${Version}' {{ __htop_package_name }}"
+      register: __htop_dpkg_check
+      failed_when: false
+      changed_when: false
 
-    - name: "Get htop version"
+    - name: "Set htop version fact"
       ansible.builtin.set_fact:
-        __htop_installed_version: '{{ ansible_facts.packages[__htop_package_name][0].version }}'
+        __htop_installed_version: "{{ __htop_dpkg_check.stdout if __htop_dpkg_check.rc == 0 else '' }}"
 
 - name: "Copy htoprc (htop 3.2.*)"
   ansible.builtin.copy:
