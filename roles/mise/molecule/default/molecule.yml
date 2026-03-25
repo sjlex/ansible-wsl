@@ -1,0 +1,25 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  # Debian 13 - Trixie
+  - name: wsl_role-mise_debian13_${MOLECULE_INSTANCE_ID}
+    image: "python:3.13.12-trixie"
+    pre_build_image: true
+
+  # Debian 12 - Bookworm
+  - name: wsl_role-mise_debian12_${MOLECULE_INSTANCE_ID}
+    image: "python:3.13.12-bookworm"
+    pre_build_image: true
+
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: "../../../"
+
+verifier:
+  name: testinfra

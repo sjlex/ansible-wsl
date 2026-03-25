@@ -1,0 +1,13 @@
+---
+- name: "Converge"
+  hosts: all
+  remote_user: "ansible"
+
+  tasks:
+    - name: "Install fish"
+      ansible.builtin.include_role:
+        name: "sjlex.collection.fish"
+
+    - name: "Include mise"
+      ansible.builtin.include_role:
+        name: "mise"
