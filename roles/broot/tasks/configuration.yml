@@ -29,6 +29,17 @@
   when: __bash_bin.stat.exists
   changed_when: false
 
+- name: "Automatic shell function installation (bash) for root"
+  ansible.builtin.shell: |
+    set -o pipefail &&
+    broot --install
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: root
+  when: __bash_bin.stat.exists
+  changed_when: false
+
 - name: "Check if fish exists"
   ansible.builtin.stat:
     path: /usr/bin/fish
@@ -39,5 +50,15 @@
     broot --install
   args:
     executable: /usr/bin/fish
+  when: __fish_bin.stat.exists
+  changed_when: false
+
+- name: "Automatic shell function installation (fish) for root"
+  ansible.builtin.shell: |
+    broot --install
+  args:
+    executable: /usr/bin/fish
+  become: true
+  become_user: root
   when: __fish_bin.stat.exists
   changed_when: false
