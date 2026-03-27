@@ -58,13 +58,28 @@ def test_fish_configuration(host, user):
     assert completions.size > 0
 
 
-@pytest.mark.parametrize("user", ["root", "ansible"])
-def test_mise_doctor(host, user):
-    cmd = host.run(
-        f"su - {user} -c \"bash -i -c %s\"",
-        """
-        mise doctor
-        """.strip(),
-    )
+@pytest.mark.parametrize(
+    "os_name,os_codename,user,package_name,package_version",
+    [
+        ("debian", "trixie", "root", "mise", "2026.3.15"),
+        ("debian", "bookworm", "root", "mise", "2026.3.15"),
+        ("debian", "trixie", "ansible", "mise", "2026.3.15"),
+        ("debian", "bookworm", "ansible", "mise", "2026.3.15"),
+    ],
+)
+def test_mise_doctor(host, os_name, os_codename, user, package_name, package_version):
+    host_os = host.system_info.distribution
+    host_os_codename = host.system_info.codename
 
-    assert cmd.rc == 0
+    if host_os == os_name and os_codename == host_os_codename:
+        cmd = host.run(
+            f"su - {user} -c \"bash -i -c %s\"",
+            """
+            mise doctor
+            """.strip(),
+        )
+
+        assert cmd.rc == 0
+        assert package_version in cmd.stdout
+        assert "activated: yes" in cmd.stdout
+        assert "shims_on_path: yes" in cmd.stdout
