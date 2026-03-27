@@ -73,7 +73,7 @@ def test_mise_doctor(host, os_name, os_codename, user, package_name, package_ver
 
     if host_os == os_name and os_codename == host_os_codename:
         cmd = host.run(
-            f"su - {user} -c \"bash -i -c %s\"",
+            f'su - {user} -c "bash -i -c %s"',
             """
             mise doctor
             """.strip(),
