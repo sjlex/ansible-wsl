@@ -23,7 +23,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: sjlex.wsl, wsl_user_name: "user" }
+         - { role: wsl, wsl_user_name: "user" }
 
 License
 -------

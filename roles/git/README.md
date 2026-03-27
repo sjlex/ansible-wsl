@@ -23,7 +23,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: sjlex.git }
+         - { role: git }
 
 License
 -------

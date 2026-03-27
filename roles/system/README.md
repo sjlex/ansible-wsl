@@ -25,7 +25,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: sjlex.system, system_upgrade: true }
+         - { role: system, system_upgrade: true }
 
 License
 -------

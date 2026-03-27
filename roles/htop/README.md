@@ -23,7 +23,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: sjlex.htop }
+         - { role: htop }
 
 License
 -------

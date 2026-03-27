@@ -23,7 +23,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: sjlex.fish }
+         - { role: fish }
 
 License
 -------

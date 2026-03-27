@@ -29,7 +29,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: sjlex.user, user_name: "user", user_shell: "/usr/bin/fish" }
+         - { role: user, user_name: "user", user_shell: "/usr/bin/fish" }
 
 License
 -------
