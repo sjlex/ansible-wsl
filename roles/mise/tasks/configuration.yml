@@ -47,20 +47,20 @@
     # --- Shell activation (fish) ---
     - name: "Ensure fish config directory exists for user"
       ansible.builtin.file:
-        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish'
+        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish/conf.d'
         state: directory
         mode: "0755"
 
     - name: "Shell activation (fish) for user"
       ansible.builtin.lineinfile:
-        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish/config.fish'
+        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish/conf.d/mise.fish'
         line: "mise activate fish | source"
         create: true
         mode: "0644"
 
     - name: "Ensure fish config directory exists for root"
       ansible.builtin.file:
-        path: "/root/.config/fish"
+        path: "/root/.config/fish/conf.d"
         state: directory
         mode: "0755"
       become: true
@@ -68,7 +68,7 @@
 
     - name: "Shell activation (fish) for root"
       ansible.builtin.lineinfile:
-        path: "/root/.config/fish/config.fish"
+        path: "/root/.config/fish/conf.d/mise.fish"
         line: "mise activate fish | source"
         create: true
         mode: "0644"
@@ -78,14 +78,14 @@
     # --- Shim activation (fish) ---
     - name: "Shim activation (fish) for user"
       ansible.builtin.lineinfile:
-        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish/config.fish'
+        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish/conf.d/mise.fish'
         line: "mise activate fish --shims | source"
         create: true
         mode: "0644"
 
     - name: "Shim activation (fish) for root"
       ansible.builtin.lineinfile:
-        path: "/root/.config/fish/config.fish"
+        path: "/root/.config/fish/conf.d/mise.fish"
         line: "mise activate fish --shims | source"
         create: true
         mode: "0644"

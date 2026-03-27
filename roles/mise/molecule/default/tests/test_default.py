@@ -32,7 +32,7 @@ def test_package_is_installed(host, os_name, os_codename, package_name, package_
 
 
 @pytest.mark.parametrize("user", ["root", "ansible"])
-def test_bash_configuration(host, user):
+def test_mise_bash_configuration(host, user):
     user_home = host.user(user).home
     bashrc = host.file(f"{user_home}/.bashrc")
 
@@ -42,16 +42,16 @@ def test_bash_configuration(host, user):
 
 
 @pytest.mark.parametrize("user", ["root", "ansible"])
-def test_fish_configuration(host, user):
+def test_mise_fish_configuration(host, user):
     if not host.file("/usr/bin/fish").exists:
         pytest.skip("Fish is not installed")
 
     user_home = host.user(user).home
-    config_fish = host.file(f"{user_home}/.config/fish/config.fish")
+    mise_fish = host.file(f"{user_home}/.config/fish/conf.d/mise.fish")
 
-    assert config_fish.exists
-    assert config_fish.contains("mise activate fish | source")
-    assert config_fish.contains("mise activate fish --shims | source")
+    assert mise_fish.exists
+    assert mise_fish.contains("mise activate fish | source")
+    assert mise_fish.contains("mise activate fish --shims | source")
 
     completions = host.file(f"{user_home}/.config/fish/completions/mise.fish")
     assert completions.exists
