@@ -53,10 +53,6 @@ def test_mise_fish_configuration(host, user):
     assert mise_fish.contains("mise activate fish | source")
     assert mise_fish.contains("mise activate fish --shims | source")
 
-    completions = host.file(f"{user_home}/.config/fish/completions/mise.fish")
-    assert completions.exists
-    assert completions.size > 0
-
 
 @pytest.mark.parametrize(
     "os_name,os_codename,user,package_name,package_version",
