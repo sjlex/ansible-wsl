@@ -1,4 +1,4 @@
-name: main [wsl2]
+name: "main [wsl~2]"
 root: ~/
 
 # Runs on project start, always
