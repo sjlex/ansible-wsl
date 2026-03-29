@@ -3,6 +3,7 @@ name = "ansible-my-wsl"
 description = "Ansible WSL workstation"
 version = "1.7.0"
 license = "MIT"
+package-mode = false
 
 authors = ["Sergei Aleksandrov <sergei.a.aleks@gmail.com>"]
 
