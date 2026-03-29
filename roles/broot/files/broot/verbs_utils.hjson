@@ -29,6 +29,13 @@ verbs: [
     }
 
     {
+        name: copy_path
+        key: ctrl-y
+        execution: "sh -c \"echo -n '{file}' | clip.exe\""
+        leave_broot: false
+    }
+
+    {
         name: tail_lines
         invocation: tl {lines_count}
         execution: "tail -f -n {lines_count} {file}"
