@@ -3,6 +3,7 @@
   ansible.builtin.copy:
     src: fish
     dest: '{{ ansible_facts["env"]["HOME"] }}/.config/'
+    mode: '0700'
 
 - name: "Reload config"
   ansible.builtin.shell: |
