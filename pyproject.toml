@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "ansible-my-wsl"
-description = "Ansible WSL workstation"
+name = "ansible-wsl"
+description = "Ansible playbooks for provisioning WSL-1 and WSL-2."
 version = "1.7.0"
 license = "MIT"
 package-mode = false
@@ -18,9 +18,9 @@ keywords = [
   "debian"
 ]
 
-homepage = "https://github.com/sjlex/ansible-my-wsl"
-repository = "https://github.com/sjlex/ansible-my-wsl"
-documentation = "https://github.com/sjlex/ansible-my-wsl/blob/main/README.md"
+homepage = "https://github.com/sjlex/ansible-wsl"
+repository = "https://github.com/sjlex/ansible-wsl"
+documentation = "https://github.com/sjlex/ansible-wsl/blob/main/README.md"
 
 [tool.poetry.dependencies]
 python = "^3.13"

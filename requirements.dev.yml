@@ -10,6 +10,6 @@ collections:
     version: "==2.1.0"
 
    # Installing collections from a local path
-  - name: "/mnt/ansible-my-collection"
+  - name: "/mnt/ansible-collection"
     type: dir
     version: "1.7.0"

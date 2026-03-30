@@ -2,10 +2,10 @@ version: '3'
 
 vars:
   VERSION: '1.7.0'
-  DOCKER_IMAGE: 'ansible-my-wsl:{{.VERSION}}'
+  DOCKER_IMAGE: 'ansible-wsl:{{.VERSION}}'
 
-  DEV_ANSIBLE_COLLECTION_PATH: '/mnt/ansible-my-collection'
-  DEV_ANSIBLE_COLLECTION_HOST_PATH: '../ansible-my-collection'
+  DEV_ANSIBLE_COLLECTION_PATH: '/mnt/ansible-collection'
+  DEV_ANSIBLE_COLLECTION_HOST_PATH: '../ansible-collection'
 
 env:
   MOLECULE_INSTANCE_ID:
@@ -132,7 +132,7 @@ tasks:
     desc: "Build docker image"
     cmds:
       - docker buildx build
-        --build-context ansible-my-collection={{.DEV_ANSIBLE_COLLECTION_HOST_PATH}}
+        --build-context ansible-collection={{.DEV_ANSIBLE_COLLECTION_HOST_PATH}}
         -t {{.DOCKER_IMAGE}}
         -f Dockerfile.dev
         {{.ROOT_DIR}}

@@ -10,6 +10,6 @@ collections:
     version: "==2.1.0"
 
   - name: sjlex.collection
-    source: https://github.com/sjlex/ansible-my-collection
+    source: https://github.com/sjlex/ansible-collection
     type: git
     version: "v1.7.0"
