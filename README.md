@@ -19,7 +19,7 @@
 
 ## Table of contents
 
-- [Ansible Collection](#ansible-playbooks-wsl)
+- [Ansible Playbooks for WSL](#ansible-playbooks-wsl)
   - [Table of contents](#table-of-contents)
   - [Getting started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -28,6 +28,9 @@
       - [Post-Install](#post-install)
     - [Bootstrap](#bootstrap)
   - [Run Playbooks](#run-playbooks)
+  - [Finalization](#finalization)
+    - [Set user password](#set-user-password)
+    - [Clear](#clear)
   - [Development](#development)
     - [Dev-Container](#dev-container)
       - [Build](#build-the-docker-image)
@@ -45,7 +48,7 @@
         - [Run integration tests manually](#run-integration-tests-manually)
         - [Login](#login)
     - [Linting](#linting)
-    - [Clear](#clear)
+    - [Clear All](#clear-all)
   - [License](#license)
   - [Third-Party Assets](#third-party-assets)
 
@@ -291,7 +294,7 @@ task lint
 task lint:fix
 ```
 
-### Clear
+### Clear All
 
 - Cache and Python environment cleanup:
 
