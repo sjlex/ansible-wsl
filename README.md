@@ -105,7 +105,7 @@ wsl --set-default debian-wsl2
 - Install the required dependencies:
 
   ```shell
-  apt install -y python3 python3-poetry python-is-python3 pyenv
+  apt install -y python3 python3-poetry python-is-python3 pyenv git
   ```
 
   ```shell
@@ -143,7 +143,7 @@ passwd <username>
 - Cache and Python environment cleanup:
 
 ```shell
-task clear
+./bin/task clear
 ```
 
 ## Development
