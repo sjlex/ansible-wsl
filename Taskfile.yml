@@ -1,8 +1,11 @@
 version: '3'
 
 vars:
-  VERSION: '1.1.0'
-  DOCKER_IMAGE: 'ansible-my-wsl:{{.VERSION}}'
+  VERSION: '1.7.0'
+  DOCKER_IMAGE: 'ansible-wsl:{{.VERSION}}'
+
+  DEV_ANSIBLE_COLLECTION_PATH: '/mnt/ansible-collection'
+  DEV_ANSIBLE_COLLECTION_HOST_PATH: '../ansible-collection'
 
 env:
   MOLECULE_INSTANCE_ID:
@@ -37,7 +40,7 @@ tasks:
     desc: "Install all dependencies"
     cmds:
       - task: "dependencies:poetry:install"
-      - task: "dependencies:ansible-galaxy:install"
+      - task: "dependencies:dev:ansible-galaxy:install"
 
   "dependencies:poetry:install":
     desc: "Install dependencies (poetry: main + dev)"
@@ -63,12 +66,29 @@ tasks:
           -r requirements.yml
           {{.CLI_ARGS}}
 
+  "dependencies:dev:ansible-galaxy:install":
+    desc: "Install dependencies (ansible-galaxy)"
+    cmds:
+      - poetry run
+        ansible-galaxy install
+          -r requirements.dev.yml
+          {{.CLI_ARGS}}
+
+  "dependencies:clear":
+    desc: "Clear all dependencies"
+    cmds:
+      - poetry env remove --all
+      - poetry cache clear --no-interaction --all .
+      - pyenv version | awk '{print $1}' | xargs pyenv uninstall -f
+
   # ----------------------------------------------------------------------------
   # Ansible
   # ----------------------------------------------------------------------------
 
   "run:local:wsl1":
     desc: "Run an Ansible playbook locally (wsl-1)"
+    env:
+      ANSIBLE_CONFIG: ansible.cfg
     cmds:
       - poetry run
         ansible-playbook
@@ -79,6 +99,8 @@ tasks:
 
   "run:local:wsl2":
     desc: "Run an Ansible playbook locally (wsl-2)"
+    env:
+      ANSIBLE_CONFIG: ansible.cfg
     cmds:
       - poetry run
         ansible-playbook
@@ -96,6 +118,11 @@ tasks:
     cmds:
       - task: "docker:container:run:shell"
 
+  "docker:dev:run":
+    desc: "Run docker dev container"
+    cmds:
+      - task: "docker:dev:container:run:shell"
+
   "docker:build":
     desc: "Build docker image"
     cmds:
@@ -105,6 +132,7 @@ tasks:
     desc: "Build docker image"
     cmds:
       - docker buildx build
+        --build-context ansible-collection={{.DEV_ANSIBLE_COLLECTION_HOST_PATH}}
         -t {{.DOCKER_IMAGE}}
         -f Dockerfile.dev
         {{.ROOT_DIR}}
@@ -117,6 +145,19 @@ tasks:
         -v {{.ROOT_DIR}}:/usr/src
         -v /var/run/docker.sock:/var/docker.sock
         -v $HOME/.vagrant.d/boxes:/root/.vagrant.d/boxes
+        -w /usr/src
+        --privileged
+        {{.DOCKER_IMAGE}}
+        {{.CLI_ARGS}} || true
+
+  "docker:dev:container:run:shell":
+    desc: "Run docker container"
+    cmds:
+      - docker run -it --rm
+        -v {{.ROOT_DIR}}:/usr/src
+        -v /var/run/docker.sock:/var/docker.sock
+        -v $HOME/.vagrant.d/boxes:/root/.vagrant.d/boxes
+        -v {{.DEV_ANSIBLE_COLLECTION_HOST_PATH}}:{{.DEV_ANSIBLE_COLLECTION_PATH}}
         -w /usr/src
         --privileged
         {{.DOCKER_IMAGE}}
@@ -227,9 +268,17 @@ tasks:
         ansible-lint
           --config-file .ansible-lint.yml
           --exclude molecule.yml
-          -p playbooks/*
+          --offline
+          --format=pep8
+          playbooks/*
           {{.ROOT_DIR}}/*
           {{.CLI_ARGS}}
+
+  "lint:ansible-lint:clear":
+    desc: "Clear ansible-lint cache"
+    cmds:
+      - rm -rf .cache/ansible-lint
+      - rm -rf .ansible
 
   "lint:ruff":
     desc: "Linting (ruff)"
@@ -243,10 +292,14 @@ tasks:
     desc: "Reformat (ruff)"
     cmds:
       - poetry run
-        ruff
-          --fix
+        ruff check --fix
           {{.ROOT_DIR}}
           {{.CLI_ARGS}}
+
+  "lint:ruff:clear":
+    desc: "Clear ruff cache"
+    cmds:
+      - rm -rf .ruff_cache
 
   "lint:black":
     desc: "Linting (black)"
@@ -267,3 +320,19 @@ tasks:
           --line-length=120
           {{.ROOT_DIR}}
           {{.CLI_ARGS}}
+
+  # ----------------------------------------------------------------------------
+  # Clear
+  # ----------------------------------------------------------------------------
+
+  "clear":
+    desc: "Clear"
+    deps:
+      - task: "clear:all"
+
+  "clear:all":
+    desc: "Clear all"
+    cmds:
+      - task: "lint:ansible-lint:clear"
+      - task: "lint:ruff:clear"
+      - task: "dependencies:clear"

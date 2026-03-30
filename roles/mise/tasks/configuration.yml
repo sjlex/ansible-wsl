@@ -1,0 +1,121 @@
+---
+- name: "Bash configuration"
+  block:
+    # --- Shell activation (bash) ---
+    - name: "Shell activation (bash) for user"
+      ansible.builtin.lineinfile:
+        path: '{{ ansible_facts["env"]["HOME"] }}/.bashrc'
+        line: 'eval "$(mise activate bash)"'
+        create: true
+        mode: "0644"
+
+    - name: "Shell activation (bash) for root"
+      ansible.builtin.lineinfile:
+        path: "/root/.bashrc"
+        line: 'eval "$(mise activate bash)"'
+        create: true
+        mode: "0644"
+      become: true
+      become_user: root
+
+    # --- Shim activation (bash) ---
+    - name: "Ensure shims directory exists for user"
+      ansible.builtin.file:
+        path: '{{ ansible_facts["env"]["HOME"] }}/.local/share/mise/shims'
+        state: directory
+        mode: "0755"
+
+    - name: "Shim activation (bash) for user"
+      ansible.builtin.lineinfile:
+        path: '{{ ansible_facts["env"]["HOME"] }}/.bashrc'
+        line: 'eval "$(mise activate bash --shims)"'
+        create: true
+        mode: "0644"
+
+    - name: "Ensure shims directory exists for root"
+      ansible.builtin.file:
+        path: "/root/.local/share/mise/shims"
+        state: directory
+        mode: "0755"
+      become: true
+      become_user: root
+
+    - name: "Shim activation (bash) for root"
+      ansible.builtin.lineinfile:
+        path: "/root/.bashrc"
+        line: 'eval "$(mise activate bash --shims)"'
+        create: true
+        mode: "0644"
+      become: true
+      become_user: root
+
+# --- Fish configuration ---
+- name: "Check if fish exists"
+  ansible.builtin.stat:
+    path: /usr/bin/fish
+  register: __fish_bin
+
+- name: "Fish configuration"
+  when: __fish_bin.stat.exists
+  block:
+    # --- Shell activation (fish) ---
+    - name: "Ensure fish config directory exists for user"
+      ansible.builtin.file:
+        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish/conf.d'
+        state: directory
+        mode: "0755"
+
+    - name: "Shell activation (fish) for user"
+      ansible.builtin.lineinfile:
+        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish/conf.d/mise.fish'
+        line: "mise activate fish | source"
+        create: true
+        mode: "0644"
+
+    - name: "Ensure fish config directory exists for root"
+      ansible.builtin.file:
+        path: "/root/.config/fish/conf.d"
+        state: directory
+        mode: "0755"
+      become: true
+      become_user: root
+
+    - name: "Shell activation (fish) for root"
+      ansible.builtin.lineinfile:
+        path: "/root/.config/fish/conf.d/mise.fish"
+        line: "mise activate fish | source"
+        create: true
+        mode: "0644"
+      become: true
+      become_user: root
+
+    # --- Shim activation (fish) ---
+    - name: "Ensure shims directory exists for user"
+      ansible.builtin.file:
+        path: '{{ ansible_facts["env"]["HOME"] }}/.local/share/mise/shims'
+        state: directory
+        mode: "0755"
+
+    - name: "Shim activation (fish) for user"
+      ansible.builtin.lineinfile:
+        path: '{{ ansible_facts["env"]["HOME"] }}/.config/fish/conf.d/mise.fish'
+        line: "mise activate fish --shims | source"
+        create: true
+        mode: "0644"
+
+    - name: "Ensure shims directory exists for root"
+      ansible.builtin.file:
+        path: "/root/.local/share/mise/shims"
+        state: directory
+        mode: "0755"
+      become: true
+      become_user: root
+
+    - name: "Shim activation (fish) for root"
+      ansible.builtin.lineinfile:
+        path: "/root/.config/fish/conf.d/mise.fish"
+        line: "mise activate fish --shims | source"
+        create: true
+        mode: "0644"
+      become: true
+      become_user: root

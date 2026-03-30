@@ -14,5 +14,4 @@ def test_config(host, user, config_path):
     assert config.is_file
     assert config.size > 0
     assert config.user == user
-    assert config.contains("memory = 4GB")
     assert config.contains("default = user")

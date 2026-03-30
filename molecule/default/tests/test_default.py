@@ -8,13 +8,14 @@ def test_user(host, user):
     assert host_user.exists
 
 
-@pytest.mark.parametrize("package_name",
+@pytest.mark.parametrize(
+    "package_name",
     [
         "bat",
         "broot",
         "btop",
         "docker",
-        "exa",
+        "eza",
         "fish",
         "fzf",
         "git",
@@ -30,7 +31,7 @@ def test_user(host, user):
 )
 def test_package_is_installed(host, package_name):
     cmd = host.run(
-        f"su - serjleks -c %s",
+        "su - serjleks -c %s",
         f"""/;
         which {package_name}
         """,

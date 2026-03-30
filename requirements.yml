@@ -2,13 +2,14 @@
 roles: []
 
 collections:
-  - name: sjlex.collection
-    source: https://github.com/sjlex/ansible-my-collection
-    type: git
-    version: "v1.1.0"
+  - name: community.general
+    version: "==12.4.0"
+  - name: community.docker
+    version: "==5.0.6"
+  - name: ansible.posix
+    version: "==2.1.0"
 
-# # Installing collections from a local path
-# collections:
-#   - name: "/mnt/ansible-my-collection"
-#     type: dir
-#     version: "1.1.0"
+  - name: sjlex.collection
+    source: https://github.com/sjlex/ansible-collection
+    type: git
+    version: "v1.7.0"

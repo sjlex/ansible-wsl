@@ -2,14 +2,14 @@
 - name: "Copy fish config"
   ansible.builtin.copy:
     src: fish
-    dest: '{{ ansible_env["HOME"] }}/.config/'
-    mode: 0644
+    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/'
+    mode: '0700'
 
 - name: "Reload config"
   ansible.builtin.shell: |
-    source '{{ ansible_env["HOME"] }}/.config/fish/config.fish'
+    source '{{ ansible_facts["env"]["HOME"] }}/.config/fish/config.fish'
   args:
     executable: "/usr/bin/fish"
   register: __fish_config_rg
   failed_when: false
-  changed_when: "__fish_config_rg.rc >= 1"
+  changed_when: false

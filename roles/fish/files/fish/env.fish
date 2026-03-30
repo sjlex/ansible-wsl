@@ -6,3 +6,5 @@ set -Ux EDITOR nvim
 
 # Disable fish greeting
 set -U fish_greeting
+
+set -x PATH "$HOME/.local/bin" $PATH

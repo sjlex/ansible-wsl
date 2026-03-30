@@ -1,0 +1,64 @@
+---
+- name: "Copy broot config"
+  ansible.builtin.copy:
+    src: broot
+    dest: '{{ ansible_facts["env"]["HOME"] }}/.config/'
+    directory_mode: "0755"
+    mode: "0644"
+
+- name: "Copy broot config to root dir"
+  ansible.builtin.copy:
+    src: broot
+    dest: "/root/.config/"
+    directory_mode: "0755"
+    mode: "0644"
+  become: true
+  become_user: root
+
+- name: "Check if bash exists"
+  ansible.builtin.stat:
+    path: /bin/bash
+  register: __bash_bin
+
+- name: "Automatic shell function installation (bash)"
+  ansible.builtin.shell: |
+    set -o pipefail &&
+    broot --install
+  args:
+    executable: /bin/bash
+  when: __bash_bin.stat.exists
+  changed_when: false
+
+- name: "Automatic shell function installation (bash) for root"
+  ansible.builtin.shell: |
+    set -o pipefail &&
+    broot --install
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: root
+  when: __bash_bin.stat.exists
+  changed_when: false
+
+- name: "Check if fish exists"
+  ansible.builtin.stat:
+    path: /usr/bin/fish
+  register: __fish_bin
+
+- name: "Automatic shell function installation (fish)"
+  ansible.builtin.shell: |
+    broot --install
+  args:
+    executable: /usr/bin/fish
+  when: __fish_bin.stat.exists
+  changed_when: false
+
+- name: "Automatic shell function installation (fish) for root"
+  ansible.builtin.shell: |
+    broot --install
+  args:
+    executable: /usr/bin/fish
+  become: true
+  become_user: root
+  when: __fish_bin.stat.exists
+  changed_when: false

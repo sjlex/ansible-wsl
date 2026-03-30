@@ -2,4 +2,3 @@
 # defaults file for wsl
 
 wsl_user_name: "user"
-wsl_memory: "4GB"

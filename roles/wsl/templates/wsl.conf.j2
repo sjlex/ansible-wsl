@@ -1,17 +1,22 @@
-[wsl2]
-{% if wsl_memory != '' %}
-memory = {{ wsl_memory }}
-{% endif %}
-
 [user]
 {% if wsl_user_name != '' %}
 default = {{ wsl_user_name }}
 {% endif %}
 
 [automount]
+enabled=true
 root = /
 options = "metadata"
+
+[boot]
+systemd=true
 
 [interop]
 enabled = true
 appendWindowsPath = true
+
+[gpu]
+enabled = true
+
+[time]
+useWindowsTimezone = true

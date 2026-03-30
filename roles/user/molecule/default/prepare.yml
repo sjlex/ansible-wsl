@@ -27,6 +27,6 @@
       become: true
       ansible.builtin.copy:
         dest: "/etc/sudoers.d/ansible"
-        mode: 0440
+        mode: "0440"
         content: |
           ansible ALL=(ALL) NOPASSWD: ALL

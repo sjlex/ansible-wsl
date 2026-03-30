@@ -52,14 +52,20 @@
     - role: tmuxinator
 
     # --------------------------------------------------------------------------
+    # Package manager
+    # --------------------------------------------------------------------------
+
+    - role: mise
+
+    # --------------------------------------------------------------------------
     # Apps / Services
     # --------------------------------------------------------------------------
 
     # Git
-    - role: sjlex.collection.git
+    - role: git
 
     # Docker
-    - role: sjlex.collection.docker
+    - role: docker
     - role: sjlex.collection.lazydocker
 
     # Text editors
@@ -68,14 +74,14 @@
 
     # Utils
     - role: sjlex.collection.bat
-    - role: sjlex.collection.exa
+    - role: sjlex.collection.eza
     - role: sjlex.collection.fzf
 
     # File managers
     - role: sjlex.collection.mc
-    - role: sjlex.collection.broot
+    - role: broot
 
     # Monitoring
     - role: sjlex.collection.btop
-    - role: sjlex.collection.htop
+    - role: htop
     - role: sjlex.collection.ncdu

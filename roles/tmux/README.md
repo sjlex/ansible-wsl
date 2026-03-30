@@ -23,7 +23,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: sjlex.tmux }
+         - { role: tmux }
 
 License
 -------

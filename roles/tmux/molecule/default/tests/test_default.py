@@ -19,6 +19,7 @@ def test_smoke(host, user):
         ("ansible", "/home/ansible/.config/tmux/conf.d/user_bind.conf"),
         ("ansible", "/home/ansible/.config/tmux/conf.d/user_status_bar.conf"),
         ("ansible", "/home/ansible/.config/tmux/user_config.conf"),
+        ("ansible", "/home/ansible/.config/tmux/tmux.conf"),
     ],
 )
 def test_config(host, user, config_path):

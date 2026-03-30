@@ -4,9 +4,7 @@
     - tmuxinator
   when:
     - ansible_facts['distribution'] == 'Debian'
-    - ansible_facts['distribution_major_version'] == "12" or
-      ansible_facts['distribution_major_version'] == "11" or
-      ansible_facts['distribution_major_version'] == "10"
+    - ansible_facts['distribution_major_version'] | int >= 12
   block:
     - name: "Install packages"
       ansible.builtin.include_role:

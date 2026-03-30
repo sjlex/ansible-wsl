@@ -1,0 +1,21 @@
+galaxy_info:
+  role_name: git
+  author: sjlex
+  description: An Ansible role to configure git.
+  license: MIT
+
+  min_ansible_version: "2.1"
+
+  platforms:
+    - name: Debian
+      versions:
+      - trixie
+      - bookworm
+
+  galaxy_tags:
+    - git
+
+dependencies: []
+
+collections:
+  - sjlex.collection

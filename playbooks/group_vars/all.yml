@@ -1,4 +1,6 @@
 ---
+ansible_python_interpreter: "/usr/bin/python3"
+
 user_name: "serjleks"
 user_shell: "/usr/bin/fish"
 user_uid: 1000
@@ -6,13 +8,12 @@ user_groups:
   - sudo
 
 wsl_user_name: "serjleks"
-wsl_memory: "8GB"
 
 git_user_name: "Sergei Aleksandrov"
 git_user_email: "sergei.a.aleks@gmail.com"
 git_core_autocrlf: "input"
 git_core_filemode: "false"
-
-git_user_signingkey: ""
+git_user_signingkey: "sergei.a.aleks@gmail.com"
 git_commit_gpgsign: "true"
 git_tag_gpgsign: "true"
+git_gpg_program: "/c/Program Files (x86)/GnuPG/bin/gpg.exe"
