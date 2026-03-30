@@ -17,6 +17,8 @@
   <a href="https://github.com/sjlex/ansible-wsl/blob/main/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/sjlex/ansible-wsl?labelColor=black&color=black"></a>&nbsp;
 </p>
 
+![Screenshot](assets/screenshots/1.png)
+
 ## Table of contents
 
 - [Ansible Playbooks for WSL](#ansible-playbooks-wsl)
